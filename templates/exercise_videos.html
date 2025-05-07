@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker - Exercise Videos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg fixed top-0 w-full z-10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">Fitness Tracker</h1>
+            <div class="flex items-center space-x-4">
+                <a href="{{ url_for('index') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Overall</a>
+                <a href="{{ url_for('exercise_todo') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Exercise Todo</a>
+                <a href="{{ url_for('custom_todo') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Custom Todo</a>
+                <a href="{{ url_for('exercise_videos') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Exercise Videos</a>
+                <a href="{{ url_for('important_videos') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Important Videos</a>
+                <a href="{{ url_for('songs') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Songs</a>
+                <a href="{{ url_for('blog') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Blog</a>
+                <a href="{{ url_for('code_editor') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Code Editor</a>
+                <button id="saveAll" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition">Save All</button>
+                <button id="deleteAll" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">Delete All</button>
+                <button id="themeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <svg id="sunIcon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg id="moonIcon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 pt-20 pb-8">
+        <!-- Exercise Videos -->
+        <section class="mb-8 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform transition-all hover:scale-[1.01]">
+            <h2 class="text-2xl font-semibold mb-4">Exercise Video Links</h2>
+            <div class="mb-4">
+                <input id="videoTitle" type="text" class="p-2 border rounded dark:border-gray-600 dark:bg-gray-700" placeholder="Video title">
+                <input id="videoUrl" type="text" class="p-2 border rounded dark:border-gray-600 dark:bg-gray-700 mt-2" placeholder="YouTube URL">
+                <input id="redditUrl" type="text" class="p-2 border rounded dark:border-gray-600 dark:bg-gray-700 mt-2" placeholder="Reddit URL">
+                <input id="xUrl" type="text" class="p-2 border rounded dark:border-gray-600 dark:bg-gray-700 mt-2" placeholder="X URL">
+                <button id="addVideo" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add Video</button>
+            </div>
+            <ul id="exercise_videos" class="list-disc pl-5"></ul>
+        </section>
+
+        <!-- Custom Images & Text -->
+        <section class="mb-8 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform transition-all hover:scale-[1.01]">
+            <h2 class="text-2xl font-semibold mb-4">Custom Images & Text</h2>
+            <div class="mb-4">
+                <input type="file" id="imageInput" accept="image/*" class="p-2 border rounded dark:border-gray-600 dark:bg-gray-700">
+                <textarea id="imageText" class="p-2 border rounded w-full mt-2 dark:border-gray-600 dark:bg-gray-700" placeholder="Description" rows="3"></textarea>
+                <button id="addImageText" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add</button>
+            </div>
+            <div id="imageTextList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
