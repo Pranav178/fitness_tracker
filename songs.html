@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker - Songs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg fixed top-0 w-full z-10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">Fitness Tracker</h1>
+            <div class="flex items-center space-x-4">
+                <a href="{{ url_for('index') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Overall</a>
+                <a href="{{ url_for('exercise_todo') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Exercise Todo</a>
+                <a href="{{ url_for('custom_todo') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Custom Todo</a>
+                <a href="{{ url_for('exercise_videos') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Exercise Videos</a>
+                <a href="{{ url_for('important_videos') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Important Videos</a>
+                <a href="{{ url_for('songs') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Songs</a>
+                <a href="{{ url_for('blog') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Blog</a>
+                <a href="{{ url_for('code_editor') }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Code Editor</a>
+                <button id="saveAll" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition">Save All</button>
+                <button id="deleteAll" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">Delete All</button>
+                <button id="themeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <svg id="sunIcon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg id="moonIcon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 pt-20 pb-8">
+        <section class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform transition-all hover:scale-[1.01]">
+            <h2 class="text-2xl font-semibold mb-4">Music Player</h2>
+            <!-- Spotify -->
+            <div class="mb-6">
+                <h3 class="text-lg font-medium mb-2">Spotify Player</h3>
+                <button id="spotifyLogin" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition mb-2">Login to Spotify</button>
+                <div id="spotifyPlayer" class="flex items-center space-x-4">
+                    <button id="spotifyPlayPause" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">Play</button>
+                    <button id="spotifyNext" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">Next</button>
+                    <span id="spotifyTrack" class="text-lg"></span>
+                </div>
+            </div>
+            <!-- YouTube -->
+            <div class="mb-6">
+                <h3 class="text-lg font-medium mb-2">YouTube Player</h3>
+                <input id="youtubeUrl" type="text" class="p-2 border rounded dark:border-gray-600 dark:bg-gray-700 mb-2" placeholder="Enter YouTube URL">
+                <button id="addYoutube" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition mb-2">Add</button>
+                <div id="youtubePlayers"></div>
+            </div>
+            <!-- Local Audio -->
+            <div>
+                <h3 class="text-lg font-medium mb-2">Local Audio</h3>
+                <input type="file" id="localAudio" accept="audio/*" multiple class="p-2 border rounded dark:border-gray-600 mb-2">
+                <button id="playLocal" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition mb-2">Play All</button>
+                <div id="localPlayers"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        window.spotifyToken = '{{ spotify_token | default("") }}';
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
